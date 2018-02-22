@@ -59,5 +59,4 @@ In `server/sql` we just have the schema updates for our postgresql db, we will i
 
 This is just a simple project to show a directory structure to start off, this may have bugs, but it's just a starter.
 
-That's all folks!
 ![aec28f0b31f6f5bbf6c6b4321eed2186](https://user-images.githubusercontent.com/1174445/36538538-ab028c76-17b2-11e8-9e1d-0c5b778a02ab.jpg)
