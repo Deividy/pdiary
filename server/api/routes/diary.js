@@ -44,7 +44,6 @@ async function validateLink (req, res) {
   res.status(409).json({ isValid: false });
 }
 
-
 async function addEntryHandler (req, res) {
   const { noteDate, diaryId, body } = req.body;
 
@@ -89,10 +88,10 @@ async function listEntriesHandler (req, res) {
 // } <!-- handlers
 
 module.exports = function (app) {
-  app.post('/diary/create', jwtVerify, bodyParser.json(), createHandler)
-  app.post('/diary/add-entry', jwtVerify, bodyParser.json(), addEntryHandler)
+  app.post('/diary/create', jwtVerify, bodyParser.json(), createHandler);
+  app.post('/diary/add-entry', jwtVerify, bodyParser.json(), addEntryHandler);
 
-  app.get('/diary/:link/list-entries', listEntriesHandler)
-  app.get('/diary/list', jwtVerify, listHandler)
-  app.get('/diary/validate-link/:link', jwtVerify, validateLink)
+  app.get('/diary/:link/list-entries', listEntriesHandler);
+  app.get('/diary/list', jwtVerify, listHandler);
+  app.get('/diary/validate-link/:link', jwtVerify, validateLink);
 };

@@ -20,6 +20,7 @@ function handleMessage (msg) {
   socketIoInstance.sockets.in(objectMessage.diaryLink).emit('data', msg);
 }
 
+// TODO MUST fix exployt when user has no access to diary
 function handleSocketConnect (socket) {
   const { diaryLink } = socket.handshake.query;
   socket.join(diaryLink);

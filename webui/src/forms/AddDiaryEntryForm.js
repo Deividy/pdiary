@@ -17,6 +17,7 @@ const { getCssInvalidOrValid } = projectDiary.functions.form;
 function validateError (values) {
   const errors = { body: null, noteDate: null };
 
+  // MUST add real validations here, PLEASE! :)
   if (!values.noteDate) {
     errors.noteDate = 'Por favor, selecione uma data para a nota!';
   }
@@ -221,7 +222,6 @@ class AddDiaryEntryForm extends Component {
       </Form>
     );
   }
-
 }
 
 projectDiary.addForm('AddDiaryEntryForm', AddDiaryEntryForm);

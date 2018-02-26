@@ -54,8 +54,9 @@ const actions = {
 
     try {
       const res = await ajaxAdapter().get(`diary/validate-link/${link}`);
-      return res.json.isValid;
+      dispatch({ type: actionTypes.validateLink });
 
+      return res.json.isValid;
     } catch (ex) {
       // MUST error handling improvements
       console.error(ex);

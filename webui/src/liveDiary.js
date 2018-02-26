@@ -22,7 +22,6 @@ class LiveDiary {
       const diaryEntry = JSON.parse(msg.toString());
 
       projectDiary.redux.diaryEntries.actions.socketAddEntry(diaryEntry);
-
     });
   }
 }

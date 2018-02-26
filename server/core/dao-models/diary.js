@@ -21,7 +21,7 @@ module.exports = function (bookshelf, DiaryEntry) {
       const diaryEntryData = diaryEntry.toJSON();
       diaryEntryData.diaryLink = this.get('link');
       publisher.send(JSON.stringify(diaryEntryData));
-      // } <!-- hack stuff
+      // } <!-- HACK stuff
 
       return diaryEntry;
     }

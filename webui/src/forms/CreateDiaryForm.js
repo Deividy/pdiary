@@ -34,6 +34,7 @@ const asyncValidators = {
 
 
 class CreateDiaryForm extends Component {
+  // MUST DRY {
   constructor (props) {
     super(props);
 
@@ -50,6 +51,7 @@ class CreateDiaryForm extends Component {
     }
     this.setState({ loading: false });
   }
+  // } <!-- DRY
 
   render () {
     return (

@@ -17,6 +17,7 @@ function validateError (values) {
 
 
 class LoginForm extends Component {
+  // MUST DRY {
   constructor (props) {
     super(props);
 
@@ -33,6 +34,7 @@ class LoginForm extends Component {
     }
     this.setState({ loading: false });
   }
+  // } DONT REPEAT YOURSELF
 
   render () {
     return (

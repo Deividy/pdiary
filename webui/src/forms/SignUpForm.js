@@ -18,6 +18,7 @@ function validateError (values) {
 }
 
 class SignUpForm extends Component {
+  // MUST DRY
   constructor (props) {
     super(props);
 

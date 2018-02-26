@@ -6,6 +6,7 @@ import { Switch, Redirect } from 'react-router-dom'
 
 import projectDiary from '../projectDiary';
 
+// MAY HACKY?!? what you think about it?
 const { HomeLoggedIn, HomeNotLoggedIn, NotFound } = projectDiary.pages;
 const { CreateAccount, CreateDiary } = projectDiary.pages;
 const { DiaryLoggedIn, DiaryNotLoggedIn } = projectDiary.pages;
