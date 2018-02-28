@@ -1,5 +1,5 @@
 {
-  "name": "journalapp-core",
+  "name": "pdiary-core",
   "version": "0.0.1",
   "description": "core of journal app",
   "main": "index.js",

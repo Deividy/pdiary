@@ -80,7 +80,7 @@ async function listEntriesHandler (req, res) {
   const diaryEntries = await daoModels.DiaryEntry
                                         .where({ diary_id: diary.id })
                                         .orderBy('note_date','DESC')
-					.orderBy('id', 'DESC')
+					                    .orderBy('id', 'DESC')
                                         .fetchAll();
 
   res.status(200).json({ success: true, diaryEntries });
