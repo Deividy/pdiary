@@ -1,0 +1,16 @@
+{
+  "name": "pdiary-pub",
+  "version": "0.0.1",
+  "description": "pub of pdiary",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^5.0.0",
+    "pg": "^7.4.1",
+    "zmq": "^2.15.3"
+  }
+}
