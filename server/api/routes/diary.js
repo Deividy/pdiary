@@ -1,4 +1,4 @@
-const { daoModels } = require('journalapp-core');
+const { daoModels } = require('pdiary-core');
 const bodyParser = require('body-parser');
 
 const util = require('util');
@@ -54,8 +54,8 @@ async function addEntryHandler (req, res) {
   }).fetch();
 
   const diaryEntry = await diaryInstance.createEntry(body, new Date(noteDate));
-  res.status(201).json({ created: true, diaryEntry });
 
+  res.status(201).json({ created: true, diaryEntry });
 }
 
 async function listEntriesHandler (req, res) {
@@ -78,10 +78,10 @@ async function listEntriesHandler (req, res) {
   }
 
   const diaryEntries = await daoModels.DiaryEntry
-                                        .where({ diary_id: diary.id })
-                                        .orderBy('note_date','DESC')
-					                    .orderBy('id', 'DESC')
-                                        .fetchAll();
+                                          .where({ diary_id: diary.id })
+                                          .orderBy('note_date','DESC')
+                                          .orderBy('id', 'DESC')
+                                          .fetchAll();
 
   res.status(200).json({ success: true, diaryEntries });
 }

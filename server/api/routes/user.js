@@ -1,4 +1,4 @@
-const { daoModels } = require('journalapp-core');
+const { daoModels } = require('pdiary-core');
 const bodyParser = require('body-parser');
 
 const util = require('util');
