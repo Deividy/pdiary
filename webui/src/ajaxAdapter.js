@@ -3,7 +3,7 @@ import projectDiary from './projectDiary';
 // TODO MUST this is HARD code and is ugly as hell :p we'll fix it!
 const baseUrl = /deividy\.com/.test(window.location.href) ?
                                           'https://pdiary-api.deividy.com' :
-                                          'http://localhost:9001';
+                                          'http://localhost:9000';
 
 class AjaxAdapter {
   async doRequest (url, method, body) {
