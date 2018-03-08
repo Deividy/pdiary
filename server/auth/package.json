@@ -1,0 +1,16 @@
+{
+  "name": "pdiary-auth",
+  "version": "0.0.1",
+  "description": "pdiary auth :D",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^5.0.0",
+    "pdiary-core": "../core",
+    "jsonwebtoken": "^8.1.1"
+  }
+}

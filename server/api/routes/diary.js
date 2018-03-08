@@ -1,5 +1,6 @@
 const { daoModels } = require('pdiary-core');
 const bodyParser = require('body-parser');
+const http = require('http');
 
 const util = require('util');
 const jwt = require('jsonwebtoken');
@@ -58,25 +59,34 @@ async function addEntryHandler (req, res) {
   res.status(201).json({ created: true, diaryEntry });
 }
 
+async function validateAccessToLink (headers, link) {
+  const opts = {
+    host: process.env.AUTH_SERVICE_HOST,
+    port: process.env.AUTH_SERVICE_PORT,
+    path: `/${link}`,
+    headers
+  }
+
+  return new Promise(function (resolve, reject) {
+    http.get(opts, function (res) {
+      if (res.statusCode === 200) return resolve();
+
+      reject('Invalid status code');
+    }).on('error', reject);
+  });
+}
+
 async function listEntriesHandler (req, res) {
   const { link } = req.params;
 
-  // MUST use only one query, not two! perf FTW
-  const diary = await daoModels.Diary.where({ link }).fetch();
-
-  if (!diary.attributes.public) {
-    try {
-      const token = req.headers.authorization.replace('Bearer ', '');
-      await jwtVerifyPromise(token, JWT_SECRET);
-      const userId = jwt.decode(token).userId;
-
-      if (userId !== diary.attributes.user_id) throw new Error('Unauthorized');
-    } catch (ex) {
-      res.status(401).json({ unauthorized: true, code: 401 });
-      return;
-    }
+  try {
+    await validateAccessToLink(req.headers, link);
+  } catch (ex) {
+    res.status(401).json({ unauthorized: true, code: 401 });
+    return;
   }
 
+  const diary = await daoModels.Diary.where({ link }).fetch();
   const diaryEntries = await daoModels.DiaryEntry
                                           .where({ diary_id: diary.id })
                                           .orderBy('note_date','DESC')
