@@ -14,7 +14,7 @@ async function handleRequest (req, res) {
     const link = urlParts.path.slice(1);
     const diary = await daoModels.Diary.where({ link }).fetch();
 
-    if (!diary.attributes.public) {
+    if (!diary.get('public')) {
       const token = req.headers.authorization.replace('Bearer ', '');
       await jwtVerifyPromise(token, JWT_SECRET);
       const userId = jwt.decode(token).userId;

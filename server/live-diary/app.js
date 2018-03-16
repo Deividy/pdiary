@@ -13,6 +13,26 @@ const io = require('socket.io');
 const httpServer = http.createServer(function (req, res) { });
 const socketIoInstance = io(httpServer);
 
+
+async function validateAccessToLink (headers, link) {
+  const opts = {
+    host: process.env.AUTH_SERVICE_HOST,
+    port: process.env.AUTH_SERVICE_PORT,
+    path: `/${link}`,
+    headers: {
+      authorization: headers.authorization || ''
+    }
+  };
+
+  return new Promise(function (resolve, reject) {
+    http.get(opts, function (res) {
+      if (res.statusCode === 200) return resolve();
+
+      reject('Invalid status code');
+    }).on('error', reject);
+  });
+}
+
 function handleMessage (msg) {
   msg = msg.toString();
   const objectMessage = JSON.parse(msg);
@@ -26,6 +46,20 @@ function handleSocketConnect (socket) {
   socket.join(diaryLink);
 }
 
+async function handleSocketHandshake (socket, next) {
+  try {
+    const { diaryLink, jwt } = socket.handshake.query;
+
+    await validateAccessToLink({ authorization: `Bearer ${jwt}` }, diaryLink);
+    next();
+  } catch (ex) {
+    console.error(ex);
+
+    next('Unauthorized');
+  }
+}
+
+socketIoInstance.use(handleSocketHandshake);
 socketIoInstance.on('connect', handleSocketConnect);
 sub.on('message', handleMessage);
 

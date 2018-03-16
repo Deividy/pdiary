@@ -64,8 +64,10 @@ async function validateAccessToLink (headers, link) {
     host: process.env.AUTH_SERVICE_HOST,
     port: process.env.AUTH_SERVICE_PORT,
     path: `/${link}`,
-    headers
-  }
+    headers: {
+      authorization: headers.authorization || ''
+    }
+  };
 
   return new Promise(function (resolve, reject) {
     http.get(opts, function (res) {

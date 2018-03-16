@@ -13,7 +13,11 @@ class LiveDiary {
   listen (diaryLink) {
     if (this.socket) this.socket.disconnect();
 
-    this.socket = io.connect(`${baseSocketUrl}?diaryLink=${diaryLink}`, {
+    const userState = projectDiary.redux.getState('user');
+    const jwt = userState ? userState.jwt : '';
+
+    this.socket = io.connect(baseSocketUrl, {
+      query: { diaryLink, jwt },
       transports: ['websocket', 'polling']
     });
 
